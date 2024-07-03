@@ -1,4 +1,11 @@
-{% set version = "5.3.1" %}
+{% set cov = "--cov=jupyter_core --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=64" %}
+{% set cov = "--cov=jupyter_core --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=64" %}
+{% set cov = "--cov=jupyter_core --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=64" %}
+{% set cov = "--cov=jupyter_core --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=64" %}
+{% set cov = "--cov=jupyter_core --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=64" %}
+{% set cov = "--cov=jupyter_core --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=64" %}
+{% set cov = "--cov=jupyter_core --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=64" %}
+{% set version = "5.7.2" %}
 
 package:
   name: jupyter_core
@@ -6,7 +13,7 @@ package:
 
 source:
   url: https://github.com/jupyter/jupyter_core/releases/download/v{{ version }}/jupyter_core-{{ version }}.tar.gz
-  sha256: 5ba5c7938a7f97a6b0481463f7ff0dbac7c15ba48cf46fa4035ca6e838aa1aba
+  sha256: aa5f8d32bbf6b431ac830496da7392035d6f61b4f54872f15c4bd2a9c3f536d9
 
 build:
   number: 0
@@ -37,10 +44,12 @@ requirements:
 {% set skip = '-k "not (' + (skip | join(' or ')) + ')"' %}
 
 # coverage is very slow on pypy
-{% set cov = "--cov jupyter_core --cov-report term-missing:skip-covered --no-cov-on-fail --cov-fail-under 65" %}
+{% set cov = "--cov=jupyter_core --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=64" %}
 {% set cov = "" %}  # [win or python_impl == 'pypy']
 
 test:
+  source_files:
+    - tests
   imports:
     - jupyter_core
   requires:
@@ -51,7 +60,7 @@ test:
     - jupyter -h
     - jupyter-migrate -h
     - jupyter-troubleshoot --help
-    - pytest -vv --pyargs jupyter_core {{ cov }} {{ skip }}
+    - pytest -vv --color=yes {{ cov }} {{ skip }}
   downstreams:
     # apparently issues with py3.11
     - ipython  # [py<3.11]

@@ -1,7 +1,11 @@
+abi_migration_branches:
+- 4.x
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64
   osx_arm64: osx_64
+conda_build:
+  pkg_format: '2'
 conda_forge_output_validation: true
 github:
   branch_name: main
@@ -9,10 +13,4 @@ github:
 provider:
   linux_aarch64: default
   linux_ppc64le: default
-test_on_native_only: true
-conda_build:
-  pkg_format: '2'
-abi_migration_branches:
-  - 4.x
-# `mamba` seems to fail with `test/downstreams`
-build_with_mambabuild: false
+test: native_and_emulated
